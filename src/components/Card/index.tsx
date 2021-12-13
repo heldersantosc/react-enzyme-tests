@@ -6,6 +6,7 @@ import {
   StyledLabel,
   StyledTitle,
 } from "./styles";
+import { ADDRESS, CEP, DISTRICT, STATE, TITLE, UF } from "../../variables";
 
 import { api } from "../../services";
 import { defaultAddress } from "../../utils/defaultAddress";
@@ -25,7 +26,7 @@ export const Card: React.FC = () => {
   return (
     <StyledCard.container>
       <StyledCard.header.content>
-        <StyledTitle>Busca por CEP</StyledTitle>
+        <StyledTitle>{TITLE}</StyledTitle>
       </StyledCard.header.content>
 
       <StyledCard.body.content>
@@ -44,27 +45,27 @@ export const Card: React.FC = () => {
 
       <StyledCard.footer.content>
         <StyledCard.footer.group>
-          <StyledLabel bold>UF: </StyledLabel>
+          <StyledLabel bold>{UF}: </StyledLabel>
           {address.uf}
         </StyledCard.footer.group>
 
         <StyledCard.footer.group>
-          <StyledLabel bold>CEP: </StyledLabel> {address.cep}
+          <StyledLabel bold>{CEP}: </StyledLabel> {address.cep}
         </StyledCard.footer.group>
 
         <StyledCard.footer.group>
-          <StyledLabel bold>Bairro: </StyledLabel>
-          {address.logradouro}
-        </StyledCard.footer.group>
-
-        <StyledCard.footer.group>
-          <StyledLabel bold>Bairro: </StyledLabel>
+          <StyledLabel bold>{DISTRICT}: </StyledLabel>
           {address.bairro}
         </StyledCard.footer.group>
 
         <StyledCard.footer.group>
-          <StyledLabel bold>Estado: </StyledLabel>
+          <StyledLabel bold>{STATE}: </StyledLabel>
           {address.localidade}
+        </StyledCard.footer.group>
+
+        <StyledCard.footer.group>
+          <StyledLabel bold>{ADDRESS}: </StyledLabel>
+          {address.logradouro}
         </StyledCard.footer.group>
       </StyledCard.footer.content>
     </StyledCard.container>
