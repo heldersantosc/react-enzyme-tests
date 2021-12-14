@@ -6,13 +6,15 @@ import { findByTestAttr } from "../../utils/findByTestAttr";
 describe("Should test button", () => {
   const mockFunction = jest.fn();
   const customButton = "custom-button";
+
   test("Should contain a text", () => {
     let component = mount(
       <Button data-test={customButton} onClick={mockFunction} text="Buscar" />
     );
     let wrapper = findByTestAttr(component, customButton);
+    console.log(wrapper.at(2).debug());
 
-    expect(wrapper.at(1).text()).toEqual("Buscar");
+    expect(wrapper.at(0).text()).toEqual("Buscar");
   });
 
   test("Should not contain a text", () => {
@@ -23,6 +25,7 @@ describe("Should test button", () => {
 
     expect(wrapper.at(1).text()).toEqual("");
   });
+
   test("Should call a function when button click", () => {
     let component = mount(
       <Button data-test={customButton} onClick={mockFunction} text="" />
