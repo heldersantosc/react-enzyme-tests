@@ -1,32 +1,20 @@
 import React, { useState } from "react";
-import {
-  StyledButton,
-  StyledCard,
-  StyledInput,
-  StyledLabel,
-  StyledTitle,
-} from "./styles";
+import { StyledCard, StyledInput, StyledLabel, StyledTitle } from "./styles";
 import { ADDRESS, CEP, DISTRICT, STATE, TITLE, UF } from "../../variables";
 
-import { api } from "../../services";
+import { Button } from "../Button";
+
 import { defaultAddress } from "../../utils/defaultAddress";
+import { searchAddress } from "../../utils/searchAddress";
 
 export const Card: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
   const [address, setAddress] = useState(defaultAddress);
 
-  function searchAddress() {
-    api
-      .getAddress(inputValue)
-      .then((response) => response.json())
-      .then((data) => setAddress(data))
-      .catch((_) => setAddress(defaultAddress));
-  }
-
   return (
     <StyledCard.container>
       <StyledCard.header.content>
-        <StyledTitle>{TITLE}</StyledTitle>
+        <StyledTitle data-test="card-title">{TITLE}</StyledTitle>
       </StyledCard.header.content>
 
       <StyledCard.body.content>
@@ -35,36 +23,53 @@ export const Card: React.FC = () => {
         </StyledLabel>
         <StyledInput
           id="inputValue"
+          name="inputValue"
           type="text"
           autoFocus
           value={inputValue}
+          data-test="card-input"
           onChange={(event) => setInputValue(event.target.value)}
         />
-        <StyledButton onClick={() => searchAddress()}>Buscar</StyledButton>
+        <Button
+          data-test="card-button"
+          onClick={() => searchAddress(inputValue, setAddress)}
+          text="Buscar"
+        />
       </StyledCard.body.content>
 
       <StyledCard.footer.content>
         <StyledCard.footer.group>
-          <StyledLabel bold>{UF}: </StyledLabel>
+          <StyledLabel data-test="card-label-uf" bold>
+            {UF}:
+          </StyledLabel>
           {address.uf}
         </StyledCard.footer.group>
 
         <StyledCard.footer.group>
-          <StyledLabel bold>{CEP}: </StyledLabel> {address.cep}
+          <StyledLabel data-test="card-label-cep" bold>
+            {CEP}:
+          </StyledLabel>
+          {address.cep}
         </StyledCard.footer.group>
 
         <StyledCard.footer.group>
-          <StyledLabel bold>{DISTRICT}: </StyledLabel>
+          <StyledLabel data-test="card-label-district" bold>
+            {DISTRICT}:
+          </StyledLabel>
           {address.bairro}
         </StyledCard.footer.group>
 
         <StyledCard.footer.group>
-          <StyledLabel bold>{STATE}: </StyledLabel>
+          <StyledLabel data-test="card-label-state" bold>
+            {STATE}:
+          </StyledLabel>
           {address.localidade}
         </StyledCard.footer.group>
 
         <StyledCard.footer.group>
-          <StyledLabel bold>{ADDRESS}: </StyledLabel>
+          <StyledLabel data-test="card-label-address" bold>
+            {ADDRESS}:
+          </StyledLabel>
           {address.logradouro}
         </StyledCard.footer.group>
       </StyledCard.footer.content>
