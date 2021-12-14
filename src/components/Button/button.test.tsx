@@ -12,7 +12,6 @@ describe("Should test button", () => {
       <Button data-test={customButton} onClick={mockFunction} text="Buscar" />
     );
     let wrapper = findByTestAttr(component, customButton);
-    console.log(wrapper.at(2).debug());
 
     expect(wrapper.at(0).text()).toEqual("Buscar");
   });
